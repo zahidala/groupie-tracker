@@ -53,8 +53,8 @@ type DatesPage struct {
 }
 
 type RelationsPage struct {
-	ID        int      `json:"id"`
-	Relations []string `json:"datesLocations"`
+	ID        int                 `json:"id"`
+	Relations map[string][]string `json:"datesLocations"`
 }
 
 func main() {
@@ -154,8 +154,11 @@ func main() {
 		}
 		// print relations
 		fmt.Println("Relations:")
-		for _, relation := range relationsPg.Relations {
-			fmt.Println("-", relation)
+		for key, values := range relationsPg.Relations {
+			fmt.Println(key, ":")
+			for _, value := range values {
+				fmt.Println("-", value)
+			}
 		}
 
 		fmt.Println()
