@@ -44,7 +44,5 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 
 	locations := pkg.FetchLocationsByArtistID(artistID)
 
-	fmt.Println(locations)
-
 	templates.ExecuteTemplate(w, "artist-details.html", locations)
 }
