@@ -7,6 +7,7 @@ import (
 )
 
 var artists []Artist
+var location LocationsPage
 
 func FetchArtists() []Artist {
 	// Send GET request to the API endpoint
@@ -98,4 +99,25 @@ func FetchRelations() []RelationsPage {
 		}
 	}
 	return relations
+}
+
+func FetchLocationsByArtistID(id string) LocationsPage {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + id)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
+	}
+
+	err = json.NewDecoder(resp.Body).Decode(&location)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return location
 }
