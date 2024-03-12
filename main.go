@@ -28,27 +28,22 @@ import (
 	pkg "groupietracker/pkg"
 	"log"
 	"net/http"
+	"time"
 )
 
 func main() {
+	start := time.Now()
 	artists := pkg.FetchArtists()
 	locations := pkg.FetchLocations()
 	dates := pkg.FetchDates()
 	relations := pkg.FetchRelations()
 
-	fmt.Println(artists[0].Name)
+	fmt.Println("time: ", time.Since(start))
+
+	fmt.Println(artists)
 	fmt.Println(locations[0].Locations)
 	fmt.Println(dates[0])
 	fmt.Println(relations[0].Relations)
-
-	// // print relations
-	// fmt.Println("Relations:")
-	// for key, values := range relations[0].Relations {
-	// 	fmt.Println(key, ":")
-	// 	for _, value := range values {
-	// 		fmt.Println("-", value)
-	// 	}
-	// }
 
 	// server
 	http.HandleFunc("/", homeHandler)
@@ -59,3 +54,12 @@ func main() {
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Groupie Tracker")
 }
+
+// // print relations
+// fmt.Println("Relations:")
+// for key, values := range relations[0].Relations {
+// 	fmt.Println(key, ":")
+// 	for _, value := range values {
+// 		fmt.Println("-", value)
+// 	}
+// }

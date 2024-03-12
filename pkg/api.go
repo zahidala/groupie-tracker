@@ -22,6 +22,7 @@ func FetchArtists() []Artist {
 	}
 
 	// Decode the JSON response
+	// var artists []Artist
 	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
 		log.Fatal(err)
@@ -30,7 +31,8 @@ func FetchArtists() []Artist {
 }
 
 func FetchLocations() []LocationsPage {
-	var locations []LocationsPage = make([]LocationsPage, 52)
+	// artists := FetchArtists()
+	var locations []LocationsPage = make([]LocationsPage, len(artists))
 	for ind, artist := range artists {
 		// get locations from link
 		loc, err := http.Get(artist.LocationsURL)
@@ -47,13 +49,14 @@ func FetchLocations() []LocationsPage {
 		if err != nil {
 			log.Fatal(err)
 		}
-		
+
 	}
 	return locations
 }
 
 func FetchDates() []DatesPage {
-	var dates []DatesPage = make([]DatesPage, 52)
+	// artists := FetchArtists()
+	var dates []DatesPage = make([]DatesPage, len(artists))
 	// get dates from link
 	for ind, artist := range artists {
 		datesJSON, err := http.Get(artist.DatesURL)
@@ -75,7 +78,8 @@ func FetchDates() []DatesPage {
 }
 
 func FetchRelations() []RelationsPage {
-	var relations []RelationsPage = make([]RelationsPage, 52)
+	// artists := FetchArtists()
+	var relations []RelationsPage = make([]RelationsPage, len(artists))
 	for ind, artist := range artists {
 		// get relations from URL
 		rel, err := http.Get(artist.RelationsURL)
