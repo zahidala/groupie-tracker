@@ -26,6 +26,9 @@ func main() {
 	// fmt.Println(relations[0].Relations)
 
 	// server
+	http.Handle("/static/",
+		http.StripPrefix("/static/",
+			http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/artist", artistDetailsHandler)
 	fmt.Println("Listening at port 8080...")

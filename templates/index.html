@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artists</title>
-  </head>
-  <body>
-    <ul>
-      {{range .}}
-      <li>Name: {{.Name}}, ID: {{.ID}}</li>
-      <a href="/artist?id={{.ID}}">Link to artist page</a>
-      {{end}}
-    </ul>
-  </body>
-</html>
+{{template "header" }}
+
+<div class="container-cards">
+  {{range .}}
+  <a href="/artist?id={{.ID}}">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{.Image}}" alt="Avatar" class="artist-image" />
+      </div>
+      <div class="card-title">{{.Name}}</div>
+    </div>
+  </a>
+  {{end}}
+</div>
+
+{{template "footer" }}
