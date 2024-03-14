@@ -48,6 +48,12 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	artistID := params.Get("id")
 
 	details := pkg.FetchArtistByID(artistID)
+	relations := pkg.FetchRelationsByID(artistID)
 
-	templates.ExecuteTemplate(w, "artist-details.html", details)
+	displayDetails := pkg.DisplayDetails{
+		ArtistDetails: details,
+		Concerts:      relations,
+	}
+
+	templates.ExecuteTemplate(w, "artist-details.html", displayDetails)
 }

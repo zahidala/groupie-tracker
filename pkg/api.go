@@ -28,28 +28,6 @@ func FetchArtists() []Artist {
 	return artists
 }
 
-func FetchLocationsByArtistID(id string) LocationsPage {
-	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + id)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
-	}
-
-	var location LocationsPage
-	err = json.NewDecoder(resp.Body).Decode(&location)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return location
-}
-
 func FetchArtistByID(id string) Artist {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + id)
 	if err != nil {
@@ -68,6 +46,26 @@ func FetchArtistByID(id string) Artist {
 	}
 
 	return artist
+}
+
+func FetchRelationsByID(id string) RelationsPage {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
+	}
+
+	var relation RelationsPage
+	err = json.NewDecoder(resp.Body).Decode(&relation)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return relation
 }
 
 // Might use later
@@ -105,6 +103,28 @@ func FetchLocations() []LocationsPage {
 
 	}
 	return locations
+}
+
+func FetchLocationsByArtistID(id string) LocationsPage {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + id)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
+	}
+
+	var location LocationsPage
+	err = json.NewDecoder(resp.Body).Decode(&location)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return location
 }
 
 func FetchDates() []DatesPage {

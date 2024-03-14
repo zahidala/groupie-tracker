@@ -6,14 +6,26 @@
     <title>Artist Details</title>
   </head>
   <body>
-    <h1>{{.Name}}</h1>
+    <h1>{{.ArtistDetails.Name}}</h1>
     <p>Members:</p>
     <ul>
-      {{range .Members}}
+      {{range .ArtistDetails.Members}}
       <li>{{.}}</li>
       {{end}}
     </ul>
-    <p>Formed: {{.Year}}</p>
-    <p>First Album: {{.FirstAlbum}}</p>
+    <p>Formed: {{.ArtistDetails.Year}}</p>
+    <p>First Album: {{.ArtistDetails.FirstAlbum}}</p>
+    <h2>Concerts:</h2>
+    <ul>
+      {{range $key, $values := .Concerts.Relations}}
+      <li>{{ $key }}:
+        <ul>
+          {{range $values}}
+          <li>{{.}}</li>
+          {{end}}
+        </ul>
+      </li>
+      {{end}}
+    </ul>
   </body>
 </html>

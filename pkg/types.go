@@ -26,3 +26,8 @@ type RelationsPage struct {
 	ID        int                 `json:"id"`
 	Relations map[string][]string `json:"datesLocations"`
 }
+
+type DisplayDetails struct {
+	ArtistDetails Artist
+	Concerts RelationsPage
+}
