@@ -24,7 +24,7 @@ header {
 }
 
 #search-box {
-  padding: 15px;
+  padding: 15px 15px 15px 35px; /* Add padding to the left */
   color: black;
   width: 400px;
   font-size: 1rem;
@@ -32,6 +32,9 @@ header {
   font-family: "Permanent Marker", cursive;
   font-weight: 200;
   font-style: normal;
+  background-image: url('https://i.ibb.co/RQ5YFp7/search-solid.png');
+  background-repeat: no-repeat;
+  background-position: 10px center; /* Position the icon 10px from the left */
 }
 
 .no-artists {
