@@ -45,7 +45,12 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	details := pkg.FetchArtistByID(artistID)
 	relations := pkg.FetchRelationsByID(artistID)
 
-	title := "Groupie Tracker" + " - " + details.Name
+	title := "Groupie Tracker - " + func() string {
+		if details.Name != "" {
+			return details.Name
+		}
+		return "Artist Details"
+	}()
 
 	displayDetails := pkg.DisplayDetails{
 		ArtistDetails: details,
