@@ -11,6 +11,36 @@
       <h1 class="heading">Groupie Tracker</h1>
     </header>
     {{end}} {{define "footer"}}
+    <script>
+      function debounce(func, delay) {
+        let timeoutId;
+        return function (...args) {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            func.apply(this, args);
+          }, delay);
+        };
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const debouncedUpdateUrl = debounce(function () {
+          let searchTerm = document.getElementById("search-box").value.trim(); // Trim whitespace
+
+          document.getElementById("search-form").submit();
+
+          // Update the URL with the search query as a parameter
+          // let url = new URL(window.location.href);
+          // url.searchParams.set("q", searchTerm);
+          // window.history.replaceState({}, "", url);
+
+          // Perform any search-related actions here
+        }, 1000); // Set the debounce delay here (e.g., 300 milliseconds)
+
+        document
+          .getElementById("search-box")
+          .addEventListener("input", debouncedUpdateUrl);
+      });
+    </script>
   </body>
 </html>
 {{end}}

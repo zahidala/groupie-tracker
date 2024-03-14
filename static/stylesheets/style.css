@@ -18,6 +18,29 @@ header {
   font-size: 3.5rem;
 }
 
+.container-search {
+  display: flex;
+  justify-content: center;
+}
+
+#search-box {
+  padding: 15px;
+  color: black;
+  width: 400px;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-family: "Permanent Marker", cursive;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.no-artists {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+}
+
 .container-cards {
   /* padding: 20px; */
   padding-block: 50px;
@@ -73,5 +96,9 @@ a {
 @media screen and (max-width: 600px) {
   .heading {
     font-size: 2.5rem;
+  }
+
+  #search-box {
+    width: 300px;
   }
 }

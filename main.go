@@ -25,7 +25,10 @@ func main() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	artists := pkg.FetchArtists()
+	params := r.URL.Query()
+	search := params.Get("q")
+
+	artists := pkg.FetchArtists(search)
 
 	title := "Groupie Tracker - Artists"
 
@@ -33,6 +36,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]interface{}{
 		"Title":   title,
 		"Artists": artists,
+		"Search":  search,
 	}
 
 	templates.ExecuteTemplate(w, "index.html", data)

@@ -1,7 +1,19 @@
 {{template "header" .}}
 
+<div class="container-search">
+  <form id="search-form" action="" method="get">
+    <input
+      type="search"
+      id="search-box"
+      name="q"
+      value="{{.Search}}"
+      placeholder="Search for Artists..."
+    />
+  </form>
+</div>
+
 <div class="container-cards">
-  {{range .Artists}}
+  {{if gt (len .Artists) 0}} {{range .Artists}}
   <a href="/artist?id={{.ID}}">
     <div class="card">
       <div class="card-image">
@@ -10,6 +22,8 @@
       <span class="card-title">{{.Name}}</span>
     </div>
   </a>
+  {{end}} {{else}}
+  <h2 class="no-artists">No artists found.</h2>
   {{end}}
 </div>
 

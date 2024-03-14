@@ -4,10 +4,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"sort"
 )
 
-func FetchArtists() []Artist {
+func FetchArtists(search string) []Artist {
 	// Send GET request to the API endpoint
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
@@ -27,10 +26,7 @@ func FetchArtists() []Artist {
 		log.Fatal(err)
 	}
 
-	// Alphabetically sort the artists
-	sort.Slice(artists, func(i, j int) bool { return artists[i].Name < artists[j].Name })
-
-	return artists
+	return FilterSearchedArtist(artists, search)
 }
 
 func FetchArtistByID(id string) Artist {
