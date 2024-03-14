@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
 body {
   background-color: #1a202c;
@@ -49,12 +49,14 @@ header {
 
 .card-title {
   color: black;
-  margin-top: 10px;
-  padding: 10px;
   font-family: "Permanent Marker", cursive;
   font-weight: 400;
   font-style: normal;
   font-size: 1.2rem;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .artist-image {
