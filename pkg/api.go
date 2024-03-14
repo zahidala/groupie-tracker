@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"sort"
 )
 
 func FetchArtists() []Artist {
@@ -25,6 +26,10 @@ func FetchArtists() []Artist {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Alphabetically sort the artists
+	sort.Slice(artists, func(i, j int) bool { return artists[i].Name < artists[j].Name })
+
 	return artists
 }
 
