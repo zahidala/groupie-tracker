@@ -6,9 +6,6 @@ import (
 	"net/http"
 )
 
-var artists []Artist
-var location LocationsPage
-
 func FetchArtists() []Artist {
 	// Send GET request to the API endpoint
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
@@ -23,12 +20,67 @@ func FetchArtists() []Artist {
 	}
 
 	// Decode the JSON response
-	// var artists []Artist
+	var artists []Artist
 	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return artists
+}
+
+func FetchLocationsByArtistID(id string) LocationsPage {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + id)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
+	}
+
+	var location LocationsPage
+	err = json.NewDecoder(resp.Body).Decode(&location)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return location
+}
+
+func FetchArtistByID(id string) Artist {
+	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
+	}
+
+	var artist Artist
+	err = json.NewDecoder(resp.Body).Decode(&artist)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return artist
+}
+
+// Might use later
+/*
+func FetchArtistByID(id string) Artist {
+	// Fetch from []Artists
+	artists := FetchArtists()
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	artistByID := artists[idInt-1]
+	return artistByID
 }
 
 func FetchLocations() []LocationsPage {
@@ -100,24 +152,4 @@ func FetchRelations() []RelationsPage {
 	}
 	return relations
 }
-
-func FetchLocationsByArtistID(id string) LocationsPage {
-	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/locations/" + id)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("API request failed with status code: %d", resp.StatusCode)
-	}
-
-	err = json.NewDecoder(resp.Body).Decode(&location)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return location
-}
+*/

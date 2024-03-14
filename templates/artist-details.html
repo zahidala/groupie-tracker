@@ -6,10 +6,14 @@
     <title>Artist Details</title>
   </head>
   <body>
+    <h1>{{.Name}}</h1>
+    <p>Members:</p>
     <ul>
-      {{range .Locations}}
+      {{range .Members}}
       <li>{{.}}</li>
       {{end}}
     </ul>
+    <p>Formed: {{.Year}}</p>
+    <p>First Album: {{.FirstAlbum}}</p>
   </body>
 </html>

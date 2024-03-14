@@ -24,6 +24,8 @@ func main() {
 	// fmt.Println(locations[0].Locations)
 	// fmt.Println(dates[0])
 	// fmt.Println(relations[0].Relations)
+	// artist_1 := pkg.FetchArtistByID("1")
+	// fmt.Println(artist_1)
 
 	// server
 	http.Handle("/static/",
@@ -45,7 +47,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
 	artistID := params.Get("id")
 
-	locations := pkg.FetchLocationsByArtistID(artistID)
+	details := pkg.FetchArtistByID(artistID)
 
-	templates.ExecuteTemplate(w, "artist-details.html", locations)
+	templates.ExecuteTemplate(w, "artist-details.html", details)
 }
