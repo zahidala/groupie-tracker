@@ -17,6 +17,12 @@
   <a href="/artist?id={{.ID}}">
     <div class="card">
       <div class="card-image">
+        <div class="container-spinner">
+          <i
+            class="fa-solid fa-spinner fa-spin"
+            style="color: black; display: none"
+          ></i>
+        </div>
         <img src="{{.Image}}" alt="Avatar" class="artist-image" />
       </div>
       <span class="card-title">{{.Name}}</span>
