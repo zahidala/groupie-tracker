@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 body {
   background-color: #1a202c;
   margin: 0;
@@ -10,6 +12,9 @@ header {
 .heading {
   color: #f0f0f0;
   text-align: center;
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .container-cards {
@@ -26,23 +31,35 @@ header {
 
 .card {
   border: 1px solid #f0f0f0;
+  background-color: white;
   min-height: 100%;
   display: flex;
   padding: 1rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  transition: transform ease 0.3s;
+}
+
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.794);
+  border: 1px solid rgba(255, 255, 255, 0.794);
+  transform: translateY(-10px);
 }
 
 .card-title {
-  color: #f0f0f0;
+  color: black;
   margin-top: 10px;
   padding: 10px;
-  font-weight: bold;
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
 }
 
 .artist-image {
   width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
 a {
