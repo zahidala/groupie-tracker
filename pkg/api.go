@@ -26,7 +26,7 @@ func FetchArtists(search string) []Artist {
 		log.Fatal(err)
 	}
 
-	return FilterSearchedArtist(artists, search)
+	return FilterSearchedArtists(artists, search)
 }
 
 func FetchArtistByID(id string) Artist {

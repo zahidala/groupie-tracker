@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func FilterSearchedArtist(artists []Artist, search string) []Artist {
+func FilterSearchedArtists(artists []Artist, search string) []Artist {
 	sort.Slice(artists, func(i, j int) bool { return artists[i].Name < artists[j].Name })
 
 	var filteredArtists []Artist
