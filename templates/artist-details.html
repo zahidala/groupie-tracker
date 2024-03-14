@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artist Details</title>
-  </head>
-  <body>
-    <h1>{{.ArtistDetails.Name}}</h1>
-    <p>Members:</p>
+{{template "header" .}}
+
+<h1>{{.DisplayDetails.ArtistDetails.Name}}</h1>
+<p>Members:</p>
+<ul>
+  {{range .DisplayDetails.ArtistDetails.Members}}
+  <li>{{.}}</li>
+  {{end}}
+</ul>
+<p>Formed: {{.DisplayDetails.ArtistDetails.Year}}</p>
+<p>First Album: {{.DisplayDetails.ArtistDetails.FirstAlbum}}</p>
+<h2>Concerts:</h2>
+<ul>
+  {{range $key, $values := .DisplayDetails.Concerts.Relations}}
+  <li>
+    {{ $key }}:
     <ul>
-      {{range .ArtistDetails.Members}}
+      {{range $values}}
       <li>{{.}}</li>
       {{end}}
     </ul>
-    <p>Formed: {{.ArtistDetails.Year}}</p>
-    <p>First Album: {{.ArtistDetails.FirstAlbum}}</p>
-    <h2>Concerts:</h2>
-    <ul>
-      {{range $key, $values := .Concerts.Relations}}
-      <li>{{ $key }}:
-        <ul>
-          {{range $values}}
-          <li>{{.}}</li>
-          {{end}}
-        </ul>
-      </li>
-      {{end}}
-    </ul>
-  </body>
-</html>
+  </li>
+  {{end}}
+</ul>
+
+{{template "footer" }}

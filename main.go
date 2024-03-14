@@ -27,7 +27,15 @@ func main() {
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	artists := pkg.FetchArtists()
 
-	templates.ExecuteTemplate(w, "index.html", artists)
+	title := "Groupie Tracker - Artists"
+
+	// Create a map to hold the data to pass to the template
+	data := map[string]interface{}{
+		"Title":   title,
+		"Artists": artists,
+	}
+
+	templates.ExecuteTemplate(w, "index.html", data)
 }
 
 func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
@@ -37,10 +45,17 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	details := pkg.FetchArtistByID(artistID)
 	relations := pkg.FetchRelationsByID(artistID)
 
+	title := "Groupie Tracker" + " - " + details.Name
+
 	displayDetails := pkg.DisplayDetails{
 		ArtistDetails: details,
 		Concerts:      relations,
 	}
 
-	templates.ExecuteTemplate(w, "artist-details.html", displayDetails)
+	data := map[string]interface{}{
+		"Title":          title,
+		"DisplayDetails": displayDetails,
+	}
+
+	templates.ExecuteTemplate(w, "artist-details.html", data)
 }
