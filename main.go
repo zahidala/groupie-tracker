@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 )
 
 var templates *template.Template
@@ -26,7 +27,9 @@ func main() {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
+
 	search := params.Get("q")
+	search = strings.TrimSpace(search)
 
 	artists := pkg.FetchArtists(search)
 
