@@ -42,17 +42,20 @@
           spinner.style.display = "block";
           spinnerContainer.style.display = "flex";
 
-          image.addEventListener("load", function () {
+          const hideSpinner = () => {
             spinner.style.display = "none";
             spinnerContainer.style.display = "none";
-          });
+          };
 
-          if (image.complete) {
-            spinner.style.display = "none";
-            spinnerContainer.style.display = "none";
-          } else {
-            spinner.style.display = "block";
-            spinnerContainer.style.display = "flex";
+          image.addEventListener("load", hideSpinner);
+          image.addEventListener("error", hideSpinner);
+
+          if (
+            image.complete &&
+            image.naturalHeight !== 0 &&
+            image.naturalWidth !== 0
+          ) {
+            hideSpinner();
           }
         });
 
