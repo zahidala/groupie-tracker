@@ -13,58 +13,59 @@
     <link rel="stylesheet" href="/static/stylesheets/style.css" />
     <title>{{.Title}}</title>
   </head>
-    {{end}} {{define "footer"}}
-    <script>
-      function debounce(func, delay) {
-        let timeoutId;
-        return function (...args) {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => {
-            func.apply(this, args);
-          }, delay);
+  {{end}} {{define "footer"}}
+  <script>
+    function debounce(func, delay) {
+      let timeoutId;
+      return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+        }, delay);
+      };
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      let images = document.querySelectorAll(".artist-image");
+
+      images.forEach(function (image) {
+        let spinnerContainer =
+          image.parentElement.querySelector(".container-spinner");
+        let spinner = spinnerContainer.querySelector(
+          ".fa-solid.fa-spinner.fa-spin"
+        );
+
+        spinner.style.display = "block";
+        spinnerContainer.style.display = "flex";
+        image.style.display = "none";
+
+        const hideSpinnerAndShowImage = () => {
+          spinner.style.display = "none";
+          spinnerContainer.style.display = "none";
+          image.style.display = "block";
         };
-      }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        let images = document.querySelectorAll(".artist-image");
+        image.addEventListener("load", hideSpinnerAndShowImage);
+        image.addEventListener("error", hideSpinnerAndShowImage);
 
-        images.forEach(function (image) {
-          let spinnerContainer =
-            image.parentElement.querySelector(".container-spinner");
-          let spinner = spinnerContainer.querySelector(
-            ".fa-solid.fa-spinner.fa-spin"
-          );
-
-          spinner.style.display = "block";
-          spinnerContainer.style.display = "flex";
-
-          const hideSpinner = () => {
-            spinner.style.display = "none";
-            spinnerContainer.style.display = "none";
-          };
-
-          image.addEventListener("load", hideSpinner);
-          image.addEventListener("error", hideSpinner);
-
-          if (
-            image.complete &&
-            image.naturalHeight !== 0 &&
-            image.naturalWidth !== 0
-          ) {
-            hideSpinner();
-          }
-        });
-
-        const debouncedUpdateUrl = debounce(function () {
-          let searchTerm = document.getElementById("search-box").value.trim();
-          document.getElementById("search-form").submit();
-        }, 1000);
-
-        document
-          .getElementById("search-box")
-          .addEventListener("input", debouncedUpdateUrl);
+        if (
+          image.complete &&
+          image.naturalHeight !== 0 &&
+          image.naturalWidth !== 0
+        ) {
+          hideSpinnerAndShowImage();
+        }
       });
-    </script>
-  </body>
+
+      const debouncedUpdateUrl = debounce(function () {
+        let searchTerm = document.getElementById("search-box").value.trim();
+        document.getElementById("search-form").submit();
+      }, 1000);
+
+      document
+        .getElementById("search-box")
+        .addEventListener("input", debouncedUpdateUrl);
+    });
+  </script>
 </html>
 {{end}}

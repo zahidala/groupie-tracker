@@ -4,37 +4,38 @@
   <header>
     <h1 class="heading">Groupie Tracker</h1>
   </header>
-<div class="container-search">
-  <form id="search-form" action="" method="get">
-    <input
-      type="search"
-      id="search-box"
-      name="q"
-      value="{{.Search}}"
-      placeholder="Search for Artists..."
-    />
-  </form>
-</div>
+  <div class="container-search">
+    <form id="search-form" action="" method="get">
+      <input
+        type="search"
+        id="search-box"
+        name="q"
+        value="{{.Search}}"
+        placeholder="Search for Artists..."
+      />
+    </form>
+  </div>
 
-<div class="container-cards">
-  {{if gt (len .Artists) 0}} {{range .Artists}}
-  <a href="/artist?id={{.ID}}">
-    <div class="card">
-      <div class="card-image" style="width: 100%">
-        <div class="container-spinner">
-          <i
-            class="fa-solid fa-spinner fa-spin"
-            style="color: black; display: none"
-          ></i>
+  <div class="container-cards">
+    {{if gt (len .Artists) 0}} {{range .Artists}}
+    <a href="/artist?id={{.ID}}">
+      <div class="card">
+        <div class="card-image" style="width: 100%">
+          <div class="container-spinner">
+            <i
+              class="fa-solid fa-spinner fa-spin"
+              style="color: black; display: none"
+            ></i>
+          </div>
+          <img src="{{.Image}}" alt="Avatar" class="artist-image" />
         </div>
-        <img src="{{.Image}}" alt="Avatar" class="artist-image" />
+        <span class="card-title">{{.Name}}</span>
       </div>
-      <span class="card-title">{{.Name}}</span>
-    </div>
-  </a>
-  {{end}} {{else}}
-  <h2 class="no-artists">No artists found.</h2>
-  {{end}}
-</div>
+    </a>
+    {{end}} {{else}}
+    <h2 class="no-artists">No artists found.</h2>
+    {{end}}
+  </div>
+</body>
 
 {{template "footer" }}
