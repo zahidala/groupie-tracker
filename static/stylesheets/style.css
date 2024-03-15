@@ -104,6 +104,13 @@ header {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
+.details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20%;
+  color: #f0f0f0;
+}
+
 a {
   color: #f0f0f0;
   text-decoration: none;

@@ -1,12 +1,25 @@
 {{template "header" .}}
 
-<h1>{{.DisplayDetails.ArtistDetails.Name}}</h1>
-<p>Members:</p>
-<ul>
-  {{range .DisplayDetails.ArtistDetails.Members}}
-  <li>{{.}}</li>
-  {{end}}
-</ul>
+<style>
+  .details-page-bg {
+    background-image: url('{{.Background}}'), url('{{.Background}}');
+    background-repeat: repeat-y;
+    background-size: 15%;
+    background-position: right, left;
+  }
+</style>
+
+<body class="details-page-bg">
+  <header>
+    <h1 class="heading">{{.DisplayDetails.ArtistDetails.Name}}</h1>
+  </header>
+  <div class="details">
+    <p>Members:</p>
+    <ul>
+      {{range .DisplayDetails.ArtistDetails.Members}}
+      <li>{{.}}</li>
+      {{end}}
+    </ul>
 <p>Formed: {{.DisplayDetails.ArtistDetails.Year}}</p>
 <p>First Album: {{.DisplayDetails.ArtistDetails.FirstAlbum}}</p>
 <h2>Concerts:</h2>
@@ -22,5 +35,7 @@
   </li>
   {{end}}
 </ul>
+</div>
+
 
 {{template "footer" }}
