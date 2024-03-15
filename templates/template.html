@@ -39,11 +39,9 @@
             ".fa-solid.fa-spinner.fa-spin"
           );
 
-          // Show the spinner
           spinner.style.display = "block";
           spinnerContainer.style.display = "flex";
 
-          // Hide the spinner when the image has loaded
           image.addEventListener("load", function () {
             spinner.style.display = "none";
             spinnerContainer.style.display = "none";
@@ -53,24 +51,15 @@
             spinner.style.display = "none";
             spinnerContainer.style.display = "none";
           } else {
-            // Otherwise, show the spinner
             spinner.style.display = "block";
             spinnerContainer.style.display = "flex";
           }
         });
 
         const debouncedUpdateUrl = debounce(function () {
-          let searchTerm = document.getElementById("search-box").value.trim(); // Trim whitespace
-
+          let searchTerm = document.getElementById("search-box").value.trim();
           document.getElementById("search-form").submit();
-
-          // Update the URL with the search query as a parameter
-          // let url = new URL(window.location.href);
-          // url.searchParams.set("q", searchTerm);
-          // window.history.replaceState({}, "", url);
-
-          // Perform any search-related actions here
-        }, 1000); // Set the debounce delay here (e.g., 300 milliseconds)
+        }, 1000);
 
         document
           .getElementById("search-box")
