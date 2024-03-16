@@ -1,6 +1,8 @@
 package groupietracker
 
 import (
+	"encoding/json"
+	"os"
 	"sort"
 	"strings"
 )
@@ -21,4 +23,23 @@ func FilterSearchedArtists(artists []Artist, search string) []Artist {
 	}
 
 	return filteredArtists
+}
+
+func FetchArtistDescriptionByName(name string) string {
+	file, _ := os.ReadFile("./constants/artist-descriptions.json")
+
+	var descriptions []ArtistDescription
+
+	err := json.Unmarshal(file, &descriptions)
+	if err != nil {
+		return "No description available."
+	}
+
+	for _, artist := range descriptions {
+		if artist.Name == name {
+			return artist.Description
+		}
+	}
+
+	return "No description available."
 }

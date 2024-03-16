@@ -28,6 +28,12 @@ type RelationsPage struct {
 }
 
 type DisplayDetails struct {
-	ArtistDetails Artist
-	Concerts RelationsPage
+	ArtistDetails     Artist
+	Concerts          RelationsPage
+	ArtistDescription string
+}
+
+type ArtistDescription struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }

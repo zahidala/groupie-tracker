@@ -51,6 +51,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 
 	details := pkg.FetchArtistByID(artistID)
 	relations := pkg.FetchRelationsByID(artistID)
+	artistDescription := pkg.FetchArtistDescriptionByName(details.Name)
 
 	title := "Groupie Tracker - " + func() string {
 		if details.Name != "" {
@@ -60,17 +61,18 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	displayDetails := pkg.DisplayDetails{
-		ArtistDetails: details,
-		Concerts:      relations,
+		ArtistDetails:     details,
+		Concerts:          relations,
+		ArtistDescription: artistDescription,
 	}
 
 	data := map[string]interface{}{
-		"Title":          title,
-		"DisplayDetails": displayDetails,
-		"DetailsPage": true,
-		"Background": displayDetails.ArtistDetails.Image,
+		"Title":             title,
+		"DisplayDetails":    displayDetails,
+		"DetailsPage":       true,
+		"Background":        displayDetails.ArtistDetails.Image,
+		"AritstDescription": artistDescription,
 	}
-	// fmt.Println(data)
 
 	templates.ExecuteTemplate(w, "artist-details.html", data)
 }
