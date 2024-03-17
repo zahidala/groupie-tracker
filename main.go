@@ -16,11 +16,11 @@ func init() {
 }
 
 func main() {
-	http.Handle("/static/",
+	http.Handle("GET /static/",
 		http.StripPrefix("/static/",
 			http.FileServer(http.Dir("static"))))
-	http.HandleFunc("/", homeHandler)
-	http.HandleFunc("/artist", artistDetailsHandler)
+	http.HandleFunc("GET /", homeHandler)
+	http.HandleFunc("GET /artist/{id}", artistDetailsHandler)
 	fmt.Println("Listening at port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
@@ -46,8 +46,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
-	params := r.URL.Query()
-	artistID := params.Get("id")
+	artistID := r.PathValue("id")
 
 	details := pkg.FetchArtistByID(artistID)
 	relations := pkg.FetchRelationsByID(artistID)

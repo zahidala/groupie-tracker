@@ -18,7 +18,7 @@
 
   <div class="container-cards">
     {{if gt (len .Artists) 0}} {{range .Artists}}
-    <a href="/artist?id={{.ID}}">
+    <a href="/artist/{{.ID}}">
       <div class="card">
         <div class="card-image" style="width: 100%">
           <div class="container-spinner">
