@@ -25,7 +25,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func errorHandler(res http.ResponseWriter, data pkg.ErrorPage) {
+func errorHandler(res http.ResponseWriter, data pkg.ErrorPageProps) {
 	res.WriteHeader(data.Error.Code)
 	templates.ExecuteTemplate(res, "error.html", data)
 }
@@ -48,7 +48,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if status != 200 {
-		errorHandler(w, pkg.ErrorPage{
+		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
 				Message: "No artists found.",
 				Code:    status,
@@ -90,7 +90,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if status != 200 {
-		errorHandler(w, pkg.ErrorPage{
+		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
 				Message: "Artist not found.",
 				Code:    status,
