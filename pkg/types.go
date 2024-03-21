@@ -5,7 +5,7 @@ type Error struct {
 	Code    int
 }
 
-type ErrorPage struct {
+type ErrorPageProps struct {
 	Error Error
 	Data  interface{}
 }
