@@ -7,7 +7,7 @@ type Error struct {
 
 type ErrorPageProps struct {
 	Error Error
-	Data  interface{}
+	Title string
 }
 
 type Artist struct {

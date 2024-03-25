@@ -27,7 +27,12 @@ func main() {
 
 func errorHandler(res http.ResponseWriter, data pkg.ErrorPageProps) {
 	res.WriteHeader(data.Error.Code)
-	templates.ExecuteTemplate(res, "error.html", data)
+
+	err := templates.ExecuteTemplate(res, "error.html", data)
+
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -53,12 +58,27 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 				Message: "No artists found.",
 				Code:    status,
 			},
-			Data: data,
+			Title: "Groupie Tracker - No Artists Found",
 		})
 		return
 	}
 
-	templates.ExecuteTemplate(w, "index.html", data)
+	if r.URL.Path != "/" {
+		errorHandler(w, pkg.ErrorPageProps{
+			Error: pkg.Error{
+				Message: "Page not found.",
+				Code:    404,
+			},
+			Title: "Groupie Tracker - Page Not Found",
+		})
+		return
+	}
+
+	err := templates.ExecuteTemplate(w, "index.html", data)
+
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
@@ -95,10 +115,14 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 				Message: "Artist not found.",
 				Code:    status,
 			},
-			Data: data,
+			Title: "Groupie Tracker - Artist Not Found",
 		})
 		return
 	}
 
-	templates.ExecuteTemplate(w, "artist-details.html", data)
+	err := templates.ExecuteTemplate(w, "artist-details.html", data)
+
+	if err != nil {
+		log.Println(err)
+	}
 }
