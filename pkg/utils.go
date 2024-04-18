@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -16,9 +17,36 @@ func FilterSearchedArtists(artists []Artist, search string) []Artist {
 		return artists
 	}
 
+	search = strings.ToLower(search)
+
 	for _, artist := range artists {
-		if artist.Name == search || strings.Contains(strings.ToLower(artist.Name), strings.ToLower(search)) {
+		artistAdded := false // to avoid duplicates
+
+		if strings.Contains(strings.ToLower(artist.Name), search) || strings.Contains(strconv.Itoa(artist.Year), search) || strings.Contains(artist.FirstAlbum, search) {
 			filteredArtists = append(filteredArtists, artist)
+			continue
+		}
+
+		for _, member := range artist.Members {
+			if member == search || strings.Contains(strings.ToLower(member), search) {
+				filteredArtists = append(filteredArtists, artist)
+				artistAdded = true
+				break
+			}
+		}
+
+		if artistAdded {
+			continue
+		}
+
+		relationsMap := FetchRelationsByID(strconv.Itoa(artist.ID)).Relations // main - line 52
+		// check if key (location) matches search
+		for key, _ := range relationsMap {
+			if key == search || strings.Contains(strings.ToLower(key), search) {
+				filteredArtists = append(filteredArtists, artist)
+				artistAdded = true
+				break
+			}
 		}
 	}
 
