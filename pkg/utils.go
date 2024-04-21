@@ -20,7 +20,7 @@ func FilterSearchedArtists(artists []Artist, search string) []Artist {
 	search = strings.ToLower(search)
 
 	for _, artist := range artists {
-		artistAdded := false // to avoid duplicates
+		// artistAdded := false // to avoid duplicates
 
 		if strings.Contains(strings.ToLower(artist.Name), search) || strings.Contains(strconv.Itoa(artist.Year), search) || strings.Contains(artist.FirstAlbum, search) {
 			filteredArtists = append(filteredArtists, artist)
@@ -30,24 +30,24 @@ func FilterSearchedArtists(artists []Artist, search string) []Artist {
 		for _, member := range artist.Members {
 			if member == search || strings.Contains(strings.ToLower(member), search) {
 				filteredArtists = append(filteredArtists, artist)
-				artistAdded = true
+				// artistAdded = true
 				break
 			}
 		}
 
-		if artistAdded {
-			continue
-		}
+		// if artistAdded {
+		// 	continue
+		// }
 
-		relationsMap := FetchRelationsByID(strconv.Itoa(artist.ID)).Relations // main - line 52
-		// check if key (location) matches search
-		for key, _ := range relationsMap {
-			if key == search || strings.Contains(strings.ToLower(key), search) {
-				filteredArtists = append(filteredArtists, artist)
-				artistAdded = true
-				break
-			}
-		}
+		// relationsMap := FetchRelationsByID(strconv.Itoa(artist.ID)).Relations // main - line 52
+		// // check if key (location) matches search
+		// for key, _ := range relationsMap {
+		// 	if key == search || strings.Contains(strings.ToLower(key), search) {
+		// 		filteredArtists = append(filteredArtists, artist)
+		// 		artistAdded = true
+		// 		break
+		// 	}
+		// }
 	}
 
 	return filteredArtists
