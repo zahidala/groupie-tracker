@@ -32,7 +32,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	search = strings.TrimSpace(search)
 
 	artists := pkg.FetchArtists(search)
-
 	title := "Groupie Tracker - Artists"
 
 	// Create a map to hold the data to pass to the template
