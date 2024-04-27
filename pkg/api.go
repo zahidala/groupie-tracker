@@ -2,7 +2,6 @@ package groupietracker
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -13,7 +12,7 @@ func FetchArtists(search string) (fetchedArtists []Artist, statusCode int) {
 
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return artists, resp.StatusCode
 	}
 	defer resp.Body.Close()
@@ -21,14 +20,14 @@ func FetchArtists(search string) (fetchedArtists []Artist, statusCode int) {
 	// Check the response status code
 	// this returns for api errors
 	if resp.StatusCode != http.StatusOK {
-		fmt.Printf("API request failed with status code: %d\n", resp.StatusCode)
+		log.Println("Artists API request failed with status code:", resp.StatusCode)
 		return artists, resp.StatusCode
 	}
 
 	// Decode the JSON response
 	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return artists, http.StatusInternalServerError
 	}
 
@@ -40,19 +39,19 @@ func FetchArtistByID(id string) (fetchedArtist Artist, statusCode int) {
 
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists/" + id)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return artist, resp.StatusCode
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		fmt.Printf("API request failed with status code: %d\n", resp.StatusCode)
+		log.Printf("Artist Details (ID: %s) API request failed with status code: %d\n", id, resp.StatusCode)
 		return artist, resp.StatusCode
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(&artist)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return artist, http.StatusInternalServerError
 	}
 
@@ -70,18 +69,18 @@ func FetchArtistByID(id string) (fetchedArtist Artist, statusCode int) {
 func FetchRelationsByID(id string) (relation RelationsPage, statusCode int) {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + id)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		fmt.Printf("API request failed with status code: %d\n", resp.StatusCode)
+		log.Printf("Relations (ID: %s) API request failed with status code: %d\n", id, resp.StatusCode)
 		return relation, resp.StatusCode
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(&relation)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	return relation, resp.StatusCode
