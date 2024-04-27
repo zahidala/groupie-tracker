@@ -55,7 +55,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if status != 200 {
 		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
-				Message: "API request failed - No artists found.",
+				Message: "No artists found.",
 				Code:    status,
 			},
 			Title: "Groupie Tracker - No Artists Found",
