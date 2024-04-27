@@ -22,7 +22,7 @@ func main() {
 	http.HandleFunc("GET /", homeHandler)
 	http.HandleFunc("GET /artist/{id}", artistDetailsHandler)
 	fmt.Println("Listening at port 8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println(http.ListenAndServe(":8080", nil))
 }
 
 func errorHandler(res http.ResponseWriter, data pkg.ErrorPageProps) {
@@ -55,7 +55,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if status != 200 {
 		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
-				Message: "API request failed - No artists found.",
+				Message: "No artists found.",
 				Code:    status,
 			},
 			Title: "Groupie Tracker - No Artists Found",
@@ -113,7 +113,7 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	if detailStatusCode != 200 {
 		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
-				Message: "API request failed - Artist not found.",
+				Message: "Artist not found.",
 				Code:    detailStatusCode,
 			},
 			Title: "Groupie Tracker - Artist Not Found",
