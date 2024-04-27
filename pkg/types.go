@@ -38,9 +38,10 @@ type RelationsPage struct {
 }
 
 type DisplayDetails struct {
-	ArtistDetails     Artist
-	Concerts          RelationsPage
-	ArtistDescription string
+	ArtistDetails      Artist
+	Concerts           RelationsPage
+	RelationStatusCode int
+	ArtistDescription  string
 }
 
 type ArtistDescription struct {

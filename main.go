@@ -55,7 +55,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if status != 200 {
 		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
-				Message: "No artists found.",
+				Message: "API request failed - No artists found.",
 				Code:    status,
 			},
 			Title: "Groupie Tracker - No Artists Found",
@@ -84,8 +84,8 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	artistID := r.PathValue("id")
 
-	details, status := pkg.FetchArtistByID(artistID)
-	relations := pkg.FetchRelationsByID(artistID)
+	details, detailStatusCode := pkg.FetchArtistByID(artistID)
+	relations, relationStatusCode := pkg.FetchRelationsByID(artistID)
 	artistDescription := pkg.FetchArtistDescriptionByName(details.Name)
 
 	title := "Groupie Tracker - " + func() string {
@@ -96,9 +96,10 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	displayDetails := pkg.DisplayDetails{
-		ArtistDetails:     details,
-		Concerts:          relations,
-		ArtistDescription: artistDescription,
+		ArtistDetails:      details,
+		Concerts:           relations,
+		RelationStatusCode: relationStatusCode,
+		ArtistDescription:  artistDescription,
 	}
 
 	data := map[string]interface{}{
@@ -109,11 +110,11 @@ func artistDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		"AritstDescription": artistDescription,
 	}
 
-	if status != 200 {
+	if detailStatusCode != 200 {
 		errorHandler(w, pkg.ErrorPageProps{
 			Error: pkg.Error{
-				Message: "Artist not found.",
-				Code:    status,
+				Message: "API request failed - Artist not found.",
+				Code:    detailStatusCode,
 			},
 			Title: "Groupie Tracker - Artist Not Found",
 		})
