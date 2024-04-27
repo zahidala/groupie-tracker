@@ -24,7 +24,10 @@
     <p>Formed: {{.DisplayDetails.ArtistDetails.Year}}</p>
     <p>First Album: {{.DisplayDetails.ArtistDetails.FirstAlbum}}</p>
     <h2>Concerts:</h2>
+    {{if ne .DisplayDetails.RelationStatusCode 200}}
+    <p><i class="fa-solid fa-triangle-exclamation fa-flip-horizontal" style="color: #FFD43B;"></i> Concert details unavailable</p>
     <ul>
+      {{else}}
       {{range $key, $values := .DisplayDetails.Concerts.Relations}}
       <li>
         {{ $key }}:
@@ -34,6 +37,7 @@
           {{end}}
         </ul>
       </li>
+      {{end}}
       {{end}}
     </ul>
   </div>
