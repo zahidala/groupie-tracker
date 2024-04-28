@@ -1,5 +1,15 @@
 package groupietracker
 
+type Error struct {
+	Message string
+	Code    int
+}
+
+type ErrorPageProps struct {
+	Error Error
+	Title string
+}
+
 type Artist struct {
 	ID           int      `json:"id"`
 	Image        string   `json:"image"`
@@ -28,9 +38,10 @@ type RelationsPage struct {
 }
 
 type DisplayDetails struct {
-	ArtistDetails     Artist
-	Concerts          RelationsPage
-	ArtistDescription string
+	ArtistDetails      Artist
+	Concerts           RelationsPage
+	RelationStatusCode int
+	ArtistDescription  string
 }
 
 type ArtistDescription struct {

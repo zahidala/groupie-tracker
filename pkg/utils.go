@@ -72,45 +72,10 @@ func FetchArtistDescriptionByName(name string) string {
 	return "No description available."
 }
 
-/* ChatGPT
-func FilterSearchedArtists(artists []Artist, search string) []Artist {
-	// Convert search string to lowercase for case-insensitive comparisons
-	search = strings.ToLower(search)
-
-	var filteredArtists []Artist
-
-	// Iterate through each artist
-	for _, artist := range artists {
-		// Check if any criteria matches the search
-		if artistMatchesSearchCriteria(artist, search) {
-			// Add artist to filteredArtists if not already added
-			if !isArtistAlreadyAdded(filteredArtists, artist) {
-				filteredArtists = append(filteredArtists, artist)
-			}
-		}
-	}
-
-	return filteredArtists
-}
-
-// Helper function to check if an artist matches the search criteria
-func artistMatchesSearchCriteria(artist Artist, search string) bool {
-	return strings.Contains(strings.ToLower(artist.Name), search) ||
-		strings.Contains(strconv.Itoa(artist.Year), search) ||
-		strings.Contains(artist.FirstAlbum, search) ||
-		artistHasMatchingMember(artist, search) ||
-		artistPerformedAtLocation(artist, search)
-}
-
-// Helper function to check if an artist is already in the filteredArtists slice
-func isArtistAlreadyAdded(filteredArtists []Artist, artist Artist) bool {
-	for _, a := range filteredArtists {
-		if a.ID == artist.ID {
-			return true
-		}
-	}
-	return false
-}
-
-// Other helper functions for band members and locations matching...
-*/
+// func FixLocations(loc string) string {
+// 	loc = strings.ToUpper(string(loc[0]))
+// 	loc = strings.ReplaceAll(loc, "-", ", ")
+// 	countryIndex := strings.Index(loc, ", ") + 1
+// 	loc = strings.ToUpper(string(loc[countryIndex]))
+// 	return loc
+// }

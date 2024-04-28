@@ -1,0 +1,49 @@
+{{template "header" .}}
+
+<body
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <header>
+    <h1 class="heading">Groupie Tracker</h1>
+  </header>
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding-block: 5rem;
+      min-width: 50%;
+    "
+  >
+    <h2 style="color: white">Oops! Nothing to see here.</h2>
+    <p style="color: white">Error {{.Error.Code}}</p>
+    <p style="color: white">{{.Error.Message}}</p>
+    <div style="padding-block: 30px">
+      <button
+        style="
+          background-color: white;
+          color: black;
+          border: none;
+          border-radius: 5px;
+          padding: 1rem 0.5rem;
+          cursor: pointer;
+          font-family: 'Permanent Marker', cursive;
+          font-weight: 400;
+          font-size: 1rem;
+          font-style: normal;
+          min-width: 200px;
+        "
+        onclick="window.history.back()"
+      >
+        Go back
+      </button>
+    </div>
+  </div>
+</body>
+
+{{template "footer"}}

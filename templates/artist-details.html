@@ -8,7 +8,7 @@
     <div>
       <p class="artist-description">{{.DisplayDetails.ArtistDescription}}</p>
       <div style="border-bottom: 1px solid white">
-        <p class="section-title">Members:</p>
+        <p class="section-title">Members</p>
       </div>
       <ul>
         {{range .DisplayDetails.ArtistDetails.Members}}
@@ -27,8 +27,11 @@
         {{end}}
       </ul>
       <div style="border-bottom: 1px solid white">
-        <p class="section-title">Concerts:</p>
+        <p class="section-title">Concerts</p>
       </div>
+      {{if ne .DisplayDetails.RelationStatusCode 200}}
+      <p class="artist-description" style= "margin-top: 20px;"><i class="fa-solid fa-triangle-exclamation fa-flip-horizontal" style="color: #FFD43B;"></i> Concert details unavailable</p>
+      {{else}}
       <ul>
         {{range $key, $values := .DisplayDetails.Concerts.Relations}}
         <li
@@ -63,6 +66,7 @@
         </li>
         {{end}}
       </ul>
+      {{end}}
     </div>
     <div class="details-card-container">
       <div class="details-card-title">
