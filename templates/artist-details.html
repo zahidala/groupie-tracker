@@ -42,7 +42,7 @@
             font-style: normal;
           "
         >
-          {{ $key }}:
+          <span class="concert-location">{{ $key }}</span>
           <ul>
             {{range $values}}
             <li
@@ -53,6 +53,7 @@
                 font-optical-sizing: auto;
                 font-weight: 200;
                 font-style: normal;
+                list-style-type: '- ';
               "
             >
               {{.}}
