@@ -1,41 +1,100 @@
 {{template "header" .}}
 
-<!-- <style>
-  .details-page-bg {
-    background-image: url("{{.Background}}"), url("{{.Background}}");
-    background-repeat: repeat-y;
-    background-size: 15%;
-    background-position: right, left;
-  }
-</style> -->
-
-<body>
+<body class="details-body">
   <header>
     <h1 class="heading">{{.DisplayDetails.ArtistDetails.Name}}</h1>
   </header>
-  <div class="details">
-    <p>Description: {{.DisplayDetails.ArtistDescription}}</p>
-    <p>Members:</p>
-    <ul>
-      {{range .DisplayDetails.ArtistDetails.Members}}
-      <li>{{.}}</li>
-      {{end}}
-    </ul>
-    <p>Formed: {{.DisplayDetails.ArtistDetails.Year}}</p>
-    <p>First Album: {{.DisplayDetails.ArtistDetails.FirstAlbum}}</p>
-    <h2>Concerts:</h2>
-    <ul>
-      {{range $key, $values := .DisplayDetails.Concerts.Relations}}
-      <li>
-        {{ $key }}:
-        <ul>
-          {{range $values}}
-          <li>{{.}}</li>
-          {{end}}
-        </ul>
-      </li>
-      {{end}}
-    </ul>
+  <div class="details-content">
+    <div>
+      <p class="artist-description">{{.DisplayDetails.ArtistDescription}}</p>
+      <div style="border-bottom: 1px solid white">
+        <p class="section-title">Members:</p>
+      </div>
+      <ul>
+        {{range .DisplayDetails.ArtistDetails.Members}}
+        <li
+          style="
+            color: white;
+            font-size: 1.3rem;
+            font-family: Raleway, sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+          "
+        >
+          {{.}}
+        </li>
+        {{end}}
+      </ul>
+      <div style="border-bottom: 1px solid white">
+        <p class="section-title">Concerts:</p>
+      </div>
+      <ul>
+        {{range $key, $values := .DisplayDetails.Concerts.Relations}}
+        <li
+          style="
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: Raleway, sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+          "
+        >
+          <span class="concert-location">{{ $key }}</span>
+          <ul>
+            {{range $values}}
+            <li
+              style="
+                color: white;
+                font-size: 1.3rem;
+                font-family: Raleway, sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 200;
+                font-style: normal;
+                list-style-type: '- ';
+              "
+            >
+              {{.}}
+            </li>
+            {{end}}
+          </ul>
+        </li>
+        {{end}}
+      </ul>
+    </div>
+    <div class="details-card-container">
+      <div class="details-card-title">
+        {{.DisplayDetails.ArtistDetails.Name}}
+      </div>
+      <img
+        src="{{.DisplayDetails.ArtistDetails.Image}}"
+        style="box-shadow: 0 0 3px rgba(0, 0, 0, 0.5)"
+        width="300px"
+        height="300px"
+      />
+      <div class="details-card-content">
+        <div style="display: flex; justify-content: space-between">
+          <span class="details-card-info-title">Name</span>
+          <span class="details-card-info-content"
+            >{{.DisplayDetails.ArtistDetails.Name}}</span
+          >
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <span class="details-card-info-title">Formed</span>
+          <span class="details-card-info-content"
+            >{{.DisplayDetails.ArtistDetails.Year}}</span
+          >
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <span class="details-card-info-title">First Album</span>
+          <span class="details-card-info-content"
+            >{{.DisplayDetails.ArtistDetails.FirstAlbum}}</span
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 

@@ -66,6 +66,24 @@
         .getElementById("search-box")
         .addEventListener("input", debouncedUpdateUrl);
     });
+
+    const concertLocationLi =
+      document.getElementsByClassName("concert-location");
+
+    Array.from(concertLocationLi).map((location) => {
+      const splitLocation = location.textContent.split("-");
+      const formattedLocation = splitLocation
+        .map((word) => {
+          const formattedUnderScoreWord = word
+            .split("_")
+            .map((y) => y.charAt(0).toUpperCase() + y.slice(1));
+
+          return formattedUnderScoreWord.join(" ");
+        })
+        .join(", ");
+
+      location.textContent = formattedLocation;
+    });
   </script>
 </html>
 {{end}}

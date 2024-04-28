@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
   background-color: #1a202c;
@@ -140,12 +141,101 @@ a {
   text-decoration: none;
 }
 
+.details-body {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-content {
+  display: flex; 
+  gap: 1rem; 
+  align-items: flex-start
+}
+
+.details-card-container {
+  border: 1px solid white;
+  width: 300px;
+  height: fit-content;
+  padding: 20px;
+  background-color: white;
+}
+
+.details-card-title {
+  text-align: center;
+  font-family: Permanent Marker, cursive;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 1.2rem;
+  margin-top: -20px;
+  padding-block: 20px;
+}
+
+.details-card-content {
+  display: flex;
+  flex-direction: column;
+  padding-block: 10px;
+  margin-top: 20px;
+  gap: 1rem;
+}
+
+.section-title {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.artist-description {
+  color: white; 
+  font-size: 1.3rem; 
+  margin-top: 0;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.details-card-info-title {
+  font-weight: bold;
+  font-family: Raleway, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.details-card-info-content {
+  font-family: Raleway, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
 @media screen and (max-width: 600px) {
   .heading {
     font-size: 2.5rem;
   }
 
+  .details-body {
+    padding-top: 0;
+  }
+
   #search-box {
     width: 300px;
+  }
+
+  .artist-description {
+    margin-block: 30px;
+  }
+
+  .details-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column-reverse;
   }
 }
