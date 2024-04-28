@@ -43,3 +43,11 @@ func FetchArtistDescriptionByName(name string) string {
 
 	return "No description available."
 }
+
+// func FixLocations(loc string) string {
+// 	loc = strings.ToUpper(string(loc[0]))
+// 	loc = strings.ReplaceAll(loc, "-", ", ")
+// 	countryIndex := strings.Index(loc, ", ") + 1
+// 	loc = strings.ToUpper(string(loc[countryIndex]))
+// 	return loc
+// }
