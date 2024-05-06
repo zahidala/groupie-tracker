@@ -11,19 +11,21 @@ func FetchArtists(search string) (fetchedArtists []Artist, statusCode int) {
 	var artists []Artist
 
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+	
 	if err != nil {
 		log.Println(err)
 		return artists, resp.StatusCode
 	}
 	defer resp.Body.Close()
 
+	
 	// Check the response status code
 	// this returns for api errors
 	if resp.StatusCode != http.StatusOK {
 		log.Println("Artists API request failed with status code:", resp.StatusCode)
 		return artists, resp.StatusCode
 	}
-
+	
 	// Decode the JSON response
 	err = json.NewDecoder(resp.Body).Decode(&artists)
 	if err != nil {
@@ -32,6 +34,29 @@ func FetchArtists(search string) (fetchedArtists []Artist, statusCode int) {
 	}
 
 	return FilterSearchedArtists(artists, search), resp.StatusCode
+}
+
+func FetchLocations(artists []Artist) (artistsWLocations []Artist, statusCode int) {
+	for _, artist := range artists {
+		resp, err := http.Get(artist.LocationsURL)
+		if err != nil {
+			log.Println(err)
+			return artists, resp.StatusCode
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			log.Println("Artists API request failed with status code:", resp.StatusCode)
+			return artists, resp.StatusCode
+		}
+		
+		err = json.NewDecoder(resp.Body).Decode(&artist.Locations)
+		if err != nil {
+			log.Println(err)
+			return artists, http.StatusInternalServerError
+		}
+	}
+	return artist, resp.StatusCode
 }
 
 func FetchArtistByID(id string) (fetchedArtist Artist, statusCode int) {
