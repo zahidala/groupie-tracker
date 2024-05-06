@@ -20,7 +20,7 @@ type Artist struct {
 	LocationsURL string   `json:"locations"`
 	DatesURL     string   `json:"concertDates"`
 	RelationsURL string   `json:"relations"`
-	Locations LocationsPage
+	Locations    LocationsPage
 }
 
 type LocationsPage struct {
